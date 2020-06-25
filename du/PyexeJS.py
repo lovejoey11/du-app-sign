@@ -187,9 +187,9 @@ def return_sign(raw_sign_code_str):
    return sign
 
 
-
+# 首页数据流
 def index_load_data(lastId):
-   # 首页数据流
+
    post_data = dict()
    post_data['tabId'] = ''
    post_data['limit'] = 20
@@ -199,8 +199,9 @@ def index_load_data(lastId):
    res_data = requests.post(index_load_more_url, headers=headers, data=post_data).text
    print(res_data)
 
+# 最近购买接口
 def recensales_load_more_data(spuId, lastId):
-   # 最近购买接口
+
    post_data = dict()
    post_data['limit'] = 20
    post_data['spuId'] = spuId
@@ -211,8 +212,9 @@ def recensales_load_more_data(spuId, lastId):
    res_data = requests.post(recensales_load_more_url, headers=headers, data=post_data).text
    print(res_data)
 
+# 关键词搜索商品接口
 def search_by_keywords_load_more_data(keywords, page, sortMode, sortType):
-   # 关键词搜索商品接口
+
    sign = return_sign('limit20page{}showHot-1sortMode{}sortType{}title{}unionId19bc545a393a25177083d4a748807cc0'.format(page, sortMode, sortType, keywords))
    print(sign)
    url = 'https://app.poizon.com/api/v1/h5/search/fire/search/list?' \
@@ -221,8 +223,9 @@ def search_by_keywords_load_more_data(keywords, page, sortMode, sortType):
    res_data = requests.get(url, headers=headers).text
    print(res_data)
 
+# 品牌列表页商品接口
 def brand_list_load_more_data(page, sortType, sortMode, catId, unionId, title=''):
-   # 品牌列表页商品接口
+
    sign = return_sign('catId{}limit20page{}showHot-1sortMode{}sortType{}title{}unionId{}19bc545a393a25177083d4a748807cc0'.format(
                        catId, page, sortMode, sortType, title, unionId
    ))
@@ -233,8 +236,9 @@ def brand_list_load_more_data(page, sortType, sortMode, catId, unionId, title=''
    res_data = requests.get(url, headers=headers).text
    print(res_data)
 
+# 商品详情页接口
 def product_detail_data(spuId, propertyValueId, productSourceName=''):
-   # 商品详情页接口
+
    post_data = dict()
    post_data['spuId'] = spuId
    post_data['productSourceName'] = productSourceName
@@ -244,9 +248,11 @@ def product_detail_data(spuId, propertyValueId, productSourceName=''):
    post_data = str(post_data).encode('utf-8')
    res_data = requests.post(product_detail_url, headers=headers, data=post_data).text
    print(res_data)
+
+
 if __name__ == '__main__':
    index_load_data(1)
-   recensales_load_more_data(73803, '')
-   search_by_keywords_load_more_data('詹17', 0, 1, 1)  # 2020年入了一双😍
-   brand_list_load_more_data(page=0, sortType=1, sortMode=1, catId=0, unionId=144)  # nike系列
-   product_detail_data(spuId=49413, propertyValueId=0)
+   # recensales_load_more_data(73803, '')
+   # search_by_keywords_load_more_data('詹17', 0, 1, 1)  # 2020年入了一双😍
+   # brand_list_load_more_data(page=0, sortType=1, sortMode=1, catId=0, unionId=144)  # nike系列
+   # product_detail_data(spuId=49413, propertyValueId=0)
